@@ -45,7 +45,7 @@ public class ItemService {
     public ItemDto updatePart(Long userId, Long itemId, Item item) {
         Item itemById = itemStorage.findItemById(itemId);
 
-        if (itemById.getOwner() != null && itemById.getOwner().getId() != userId) {
+        if (itemById.getOwner() != null && !itemById.getOwner().getId().equals(userId)) {
             throw new NotFoundException("У пользователя id=" + userId + " не найдена вещь с id=" + itemId + " для изменения.");
         }
 

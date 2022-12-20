@@ -41,7 +41,7 @@ public class ItemStorageInMemory implements ItemStorage {
     @Override
     public List<Item> findAll(Long userId) {
         return items.stream()
-                .filter(data -> (data.getOwner().getId() == userId))
+                .filter(data -> (data.getOwner().getId().equals(userId)))
                 .collect(Collectors.toList());
     }
 
@@ -79,4 +79,5 @@ public class ItemStorageInMemory implements ItemStorage {
 
         return (item != null);
     }
+
 }

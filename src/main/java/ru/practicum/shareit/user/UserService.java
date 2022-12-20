@@ -83,10 +83,9 @@ public class UserService {
 
         User userByEmail = userStorage.findUserByEmail(email);
 
-        if (userByEmail != null && (user.getId() == null || userByEmail.getId() != user.getId())) {
+        if (userByEmail != null && (user.getId() == null || !userByEmail.getId().equals(user.getId()))) {
             throw new ValidationException("Пользователь с email=" + user.getEmail() + " уже зарегистрирован.");
         }
-
     }
 
 }
