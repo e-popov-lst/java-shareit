@@ -7,11 +7,8 @@ import java.util.*;
 
 @Component("userStorageInMemory")
 public class UserStorageInMemory implements UserStorage {
-
     private static long lastUserId = 0;
-
     private final Set<User> users = new HashSet<>();
-
 
     @Override
     public User create(User user) {
@@ -28,7 +25,7 @@ public class UserStorageInMemory implements UserStorage {
     @Override
     public User update(User user) {
         if (!users.contains(user)) {
-            throw new NotFoundException("Пользователь с id=" + user.getId() + " не найден для изменения.");
+            throw new NotFoundException("Пользователь с id=" + user.getId() + " не найден для изменения.", User.class.getName());
         } else {
             users.remove(user);
 
@@ -40,7 +37,7 @@ public class UserStorageInMemory implements UserStorage {
     @Override
     public void delete(User user) {
         if (!users.contains(user)) {
-            throw new NotFoundException("Пользователь с id=" + user.getId() + " не найден для удаления.");
+            throw new NotFoundException("Пользователь с id=" + user.getId() + " не найден для удаления.", User.class.getName());
         } else {
             users.remove(user);
         }

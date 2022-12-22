@@ -46,7 +46,7 @@ public class ItemService {
         Item itemById = itemStorage.findItemById(itemId);
 
         if (itemById.getOwner() != null && !itemById.getOwner().getId().equals(userId)) {
-            throw new NotFoundException("У пользователя id=" + userId + " не найдена вещь с id=" + itemId + " для изменения.");
+            throw new NotFoundException("У пользователя id=" + userId + " не найдена вещь с id=" + itemId + " для изменения.", Item.class.getName());
         }
 
         itemById.setId(item.getId() != null ? item.getId() : itemById.getId());
@@ -87,7 +87,7 @@ public class ItemService {
         if (userId != null) {
             User user = userStorage.findUserById(userId);
             if (user == null) {
-                throw new NotFoundException("Пользователь-владелец с id=" + userId + " не найден.");
+                throw new NotFoundException("Пользователь-владелец с id=" + userId + " не найден.", User.class.getName());
             }
 
             item.setOwner(user);

@@ -13,14 +13,12 @@ import java.util.List;
 
 @Service
 public class UserService {
-
     public final UserStorage userStorage;
 
     @Autowired
     public UserService(@Qualifier("userStorageInMemory") UserStorage userStorage) {
         this.userStorage = userStorage;
     }
-
 
     public UserDto create(User user) {
         if (user.getId() != null && userStorage.isExistsUserById(user.getId())) {
@@ -33,7 +31,7 @@ public class UserService {
 
     public UserDto update(User user) {
         if (!userStorage.isExistsUserById(user.getId())) {
-            throw new NotFoundException("Пользователь с id=" + user.getId() + " не найден для изменения.");
+            throw new NotFoundException("Пользователь с id=" + user.getId() + " не найден для изменения.", User.class.getName());
         }
 
         validate(user);
@@ -44,7 +42,7 @@ public class UserService {
         User userById = userStorage.findUserById(id);
 
         if (userById == null) {
-            throw new NotFoundException("Пользователь с id=" + id + " не найден для изменения.");
+            throw new NotFoundException("Пользователь с id=" + id + " не найден для изменения.", User.class.getName());
         }
 
         validate(new User(id, user.getName() != null ? user.getName() : userById.getName(), user.getEmail() != null ? user.getEmail() : userById.getEmail()));

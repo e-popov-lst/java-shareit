@@ -10,13 +10,9 @@ import javax.validation.constraints.Email;
 @Data
 @AllArgsConstructor
 public class User {
-
     @EqualsAndHashCode.Include
     private Long id;
-
     private String name;
-
     @Email(message = "Не корректный email.")
     private String email;
-
 }

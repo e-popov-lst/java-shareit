@@ -8,11 +8,8 @@ import java.util.stream.Collectors;
 
 @Component("itemStorageInMemory")
 public class ItemStorageInMemory implements ItemStorage {
-
     private static long lastItemId = 0;
-
     private final Set<Item> items = new HashSet<>();
-
 
     @Override
     public Item create(Item item) {
@@ -29,7 +26,7 @@ public class ItemStorageInMemory implements ItemStorage {
     @Override
     public Item update(Item item) {
         if (!items.contains(item)) {
-            throw new NotFoundException("Вещь с id=" + item.getId() + " не найдена для изменения.");
+            throw new NotFoundException("Вещь с id=" + item.getId() + " не найдена для изменения.", Item.class.getName());
         } else {
             items.remove(item);
 
