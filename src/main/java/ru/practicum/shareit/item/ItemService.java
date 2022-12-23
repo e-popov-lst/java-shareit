@@ -83,6 +83,10 @@ public class ItemService {
         return itemsList;
     }
 
+    public UserStorage getUserStorage() {
+        return userStorage;
+    }
+
     private void setOwnerByUserId(Long userId, Item item) {
         if (userId != null) {
             User user = userStorage.findUserById(userId);
